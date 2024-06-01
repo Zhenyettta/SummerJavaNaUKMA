@@ -1,4 +1,4 @@
-package com.ZhenyokAndVityok;
+package com.practice;
 
 import java.io.FileWriter;
 import java.io.IOException;
