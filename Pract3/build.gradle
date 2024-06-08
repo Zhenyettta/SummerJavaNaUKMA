@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    }
+}
+tasks.register('checkFile') {
+    doLast {
+        def file = file('api-module/src/main/resources/api-key.txt')
+        if (file.exists()) {
+            println "File exists!"
+        } else {
+            println "File does not exist!"
+        }
+    }
+}
+
+tasks.register('buildProject') {
+    dependsOn ':main-module:build', ':api-module:build', ':formatter-module:build'
+    doLast {
+        println "Project built successfully!"
+    }
+}
+

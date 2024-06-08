@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ukma.practice'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
+}
+
+test {
+    useJUnitPlatform()
+}

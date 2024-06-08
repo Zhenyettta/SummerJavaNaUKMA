@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ukma.practice'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':api-module')
+    implementation project(':formatter-module')
+}
