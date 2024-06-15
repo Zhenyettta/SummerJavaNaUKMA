@@ -1,0 +1,7 @@
+com\anisimov\service\WeatherService.class
+com\anisimov\annotation\ValidateCity.class
+com\anisimov\processor\ValidateCityAspect.class
+com\anisimov\service\WeatherServiceImpl.class
+com\anisimov\WeatherApp.class
+com\anisimov\service\WeatherServiceImplFactory.class
+com\anisimov\Weather.class
