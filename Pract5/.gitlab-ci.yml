@@ -1,0 +1,35 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  image: maven:3.8.4-openjdk-17
+  script:
+    - mvn clean install
+  artifacts:
+    paths:
+      - target/*.jar
+
+static_analysis:
+  stage: test
+  image: maven:3.8.4-openjdk-17
+  script:
+    - mvn checkstyle:check
+
+deploy:
+  stage: deploy
+  image: maven:3.8.4-openjdk-17
+  script:
+    - echo "Deploying the JAR file..."
+    - mv target/*.jar /path/to/deploy
+  only:
+    - master
