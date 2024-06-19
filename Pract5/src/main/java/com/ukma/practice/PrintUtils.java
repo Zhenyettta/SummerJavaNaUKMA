@@ -9,10 +9,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrintUtils {
-    public static void displayWeatherForecast(String weatherForecast) throws IOException {
+/**
+ * Utility class for printing weather forecasts.
+ */
+public final class PrintUtils {
+    private static final int monthCount = 5; //month count
+
+    // Private constructor to prevent instantiation
+    private PrintUtils() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    /**
+     * Displays the weather forecast.
+     *
+     * @param weatherForecast the weather forecast as a string
+     * @throws IOException if an I/O error occurs
+     */
+    public static void displayWeatherForecast(final String weatherForecast) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(weatherForecast);
+
 
         if (root.has("location") && root.has("current") && root.has("forecast")) {
             JsonNode location = root.path("location");
@@ -37,11 +54,12 @@ public class PrintUtils {
                 LocalDateTime now = LocalDateTime.parse(localtime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 List<JsonNode> nextHours = new ArrayList<>();
                 for (JsonNode hourData : forecast) {
-                    LocalDateTime hourTime = LocalDateTime.parse(hourData.path("time").asText(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime hourTime = LocalDateTime.parse(hourData.path("time").asText(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                     if (!hourTime.isBefore(now)) {
                         nextHours.add(hourData);
                     }
-                    if (nextHours.size() >= 5) {
+                    if (nextHours.size() >= monthCount) {
                         break;
                     }
                 }

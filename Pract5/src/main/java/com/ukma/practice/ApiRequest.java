@@ -5,8 +5,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Class for handling API requests.
+ */
 public class ApiRequest {
-    public String fetchWeatherData(String city) {
+
+    /**
+     * Fetches weather data for a given city.
+     *
+     * @param city the name of the city
+     * @return weather data as a string
+     */
+    public String fetchWeatherData(final String city) {
         String apiKey = "addab5935ca14383b6e221323230411";
         String urlString = "https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + city;
 
@@ -33,3 +43,4 @@ public class ApiRequest {
         }
     }
 }
+
